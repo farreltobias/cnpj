@@ -121,6 +121,7 @@ export function isValid(cnpj: string, isStrict: boolean = false): boolean {
  *
  * @export
  * @param {boolean} [useFormat] if `true`, it will format using `.` and `-`. Optional.
+ * @param {boolean} [useOnlyNumbers] if `true`, it will format using only numbers insted of numbers and chars
  * @returns {string} the CNPJ.
  */
 export function generate(useFormat = false, useOnlyNumbers = false): string {

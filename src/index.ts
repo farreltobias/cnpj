@@ -116,11 +116,6 @@ export function isValid(cnpj: string, isStrict: boolean = false): boolean {
   return numbers.slice(12).join("") === stripped.substr(-2);
 }
 
-type GenerateOptions = {
-  useFormat: boolean
-  useOnlyNumbers: booblean
-}
-
 /**
  * Generate a random CNPJ.
  *
@@ -128,7 +123,7 @@ type GenerateOptions = {
  * @param {boolean} [useFormat] if `true`, it will format using `.` and `-`. Optional.
  * @returns {string} the CNPJ.
  */
-export function generate({ useFormat, useOnlyNumbers }: GenerateOptions = {}): string {
+export function generate(useFormat = false, useOnlyNumbers = false): string {
   const charsToUse = useOnlyNumbers ? NUMBERS : CHARS;
   let digits = [];
 

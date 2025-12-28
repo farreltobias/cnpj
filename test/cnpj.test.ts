@@ -52,7 +52,7 @@ test("returns formatted number", () => {
   expect(cnpj.format("12abc34501de35")).toEqual("12.ABC.345/01DE-35");
 });
 
-test("generates formatted number", () => {
+test("generates formatted string", () => {
   const number = cnpj.generate(true);
 
   expect(number).toMatch(
@@ -61,11 +61,29 @@ test("generates formatted number", () => {
   expect(cnpj.isValid(number)).toBeTruthy();
 });
 
-test("generates unformatted number", () => {
+test("generates formatted number", () => {
+  const number = cnpj.generate(true, true);
+
+  expect(number).toMatch(
+    /^([\d]{2}).([\d]{3}).([\d]{3})\/([\d]{4})-(\d{2})$/,
+  );
+  expect(cnpj.isValid(number)).toBeTruthy();
+});
+
+test("generates unformatted string", () => {
   const number = cnpj.generate();
 
   expect(number).toMatch(
     /^([A-Z\d]{2})([A-Z\d]{3})([A-Z\d]{3})([A-Z\d]{4})(\d{2})$/,
+  );
+  expect(cnpj.isValid(number)).toBeTruthy();
+});
+
+test("generates unformatted number", () => {
+  const number = cnpj.generate(false, true);
+
+  expect(number).toMatch(
+    /^([\d]{2})([\d]{3})([\d]{3})([\d]{4})(\d{2})$/,
   );
   expect(cnpj.isValid(number)).toBeTruthy();
 });

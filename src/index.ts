@@ -14,6 +14,7 @@ const REJECT_LIST = [
 
 const STRICT_STRIP_REGEX = /[-\/.]/g;
 const LOOSE_STRIP_REGEX = /[^A-Z\d]/g;
+const NUMBERS = "01234567890".split("");
 const CHARS = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 /**
@@ -115,6 +116,11 @@ export function isValid(cnpj: string, isStrict: boolean = false): boolean {
   return numbers.slice(12).join("") === stripped.substr(-2);
 }
 
+type GenerateOptions = {
+  useFormat: boolean
+  useOnlyNumbers: booblean
+}
+
 /**
  * Generate a random CNPJ.
  *
@@ -122,11 +128,12 @@ export function isValid(cnpj: string, isStrict: boolean = false): boolean {
  * @param {boolean} [useFormat] if `true`, it will format using `.` and `-`. Optional.
  * @returns {string} the CNPJ.
  */
-export function generate(useFormat: boolean = false): string {
+export function generate({ useFormat, useOnlyNumbers }: GenerateOptions = {}): string {
+  const charsToUse = useOnlyNumbers ? NUMBERS : CHARS;
   let digits = [];
 
   for (let i = 0; i < 12; i += 1) {
-    digits.push(CHARS[Math.floor(Math.random() * CHARS.length)]);
+    digits.push(charsToUse[Math.floor(Math.random() * charsToUse.length)]);
   }
 
   let numbers = digits.map((digit) => digit.charCodeAt(0) - 48);

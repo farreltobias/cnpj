@@ -55,11 +55,17 @@ cnpj.strip("41.381.074/6738-65");
 cnpj.format("41381074673865");
 //=> 41.381.074/6738-65
 
-cnpj.generate(true); // generate formatted number
+cnpj.generate(true); // generate formatted string
+//=> 1Q.28F.QO7/0001-97
+
+cnpj.generate(true, true); // generate formatted number
 //=> 54.385.406/3140-07
 
-cnpj.generate(); // generate unformatted number
-//=> 07033324230766
+cnpj.generate(); // generate unformatted string
+//=> 1Q28FQO7000197
+
+cnpj.generate(false, true); // generate unformatted number
+//=> 54385406314007
 ```
 
 On the web, without transformation, just use `web/cnpj.min.js`.
